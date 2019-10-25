@@ -1,0 +1,55 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Monty Hall Code Exercise}
+\author{Jonas Gonçalves}
+\date{October 2019}
+
+\begin{document}
+
+\maketitle
+
+\section{Introdução}
+
+Faça um programa que simule o paradoxo de Monty Hall, de modo a comparar duas diferentes estratégias: a pessoa que se atém a sua primeira escolha e aquela muda sua escolha. \par
+Seu programa deve receber como argumento o número de simulações desejadas, N, de modo que sejam realizados N diferentes jogos, sempre fazendo um novo sorteio aleatório para as posições das cabras e do prêmio. Com o resultado guardado destas N simulações, o número de acertos que cada estratégia obteve, você deve retornar ao usuário a estimativa da probabilidade de cada estratégia e deve compará-las a suas probabilidades teóricas.
+
+\section{Gráfico}
+
+Uma funcionalidade interessante plotar gráficos em barras com as diferentes probabilidades finais. Uma recomendação para tal tarefa, caso a linguagem que esteja sendo usada seja python, seria a da utilização das bibliotecas \textbf{matplotlib} e \textbf{numpy}.
+
+\section{Desafio}
+
+Como desafio temos a generalização para o problema, agora teríamos \textbf{P} portas e z\textbf{C} cabras mostradas aos jogadores. Claro, existem limitações, não faria sentido existir um jogo no qual temos 3 portas e mostramos 2 cabras, deste modo a resposta seria trivial; nem faria sentido existirem mais cabras mostradas que números de portas. \par
+Assim, \(\textbf{P},\textbf{C} \in Z\) e:
+\[P \ge 1\] \[0 \le C \ge P-2\]
+
+Lembre-se, você deve agora descobrir uma nova fórmula para cada um das diferentes probabilidades teóricas, que vão depender tanto do número de portas quanto das cabras mostradas.
+
+\section{Exemplos de Execução}
+\begin{itemize}
+    \item \textbf{Código Padrão:}\\
+            \$ python3 MontyHallExercise.py\\
+            The number of simulations is: 10000\\
+            Changing simulation/theorical probability = 0.6747 / 0.6666666666666666\\
+            Staying simulation/theorical probability = 3318 / 0.3333333333333333
+    \item \textbf{Código com Amostragem Gráfica:}\\
+            \$ python3 MontyHallExercise.py\\
+            The number of simulations is: 10000\\
+            Changing simulation/theorical probability = 0.6747 / 0.6666666666666666\\
+            Staying simulation/theorical probability = 3318 / 0.3333333333333333\\
+            Type 'g' if you want a graph: g\\
+            Type 'l' if you want labels: l
+        \item \textbf{Código com Amostragem Gráfica:}\\
+            \$ python3 MontyHallExercise.py\\
+            The number of simulations is: 10000\\
+            The number of doors is: 3\\
+            The number of goats shown is: 1\\
+            Changing simulation/theorical probability = 0.6747 / 0.6666666666666666\\
+            Staying simulation/theorical probability = 3318 / 0.3333333333333333\\
+            Type 'g' if you want a graph: g\\
+            Type 'l' if you want labels: l
+
+\end{itemize}
+
+\end{document}
