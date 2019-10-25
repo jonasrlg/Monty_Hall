@@ -3,58 +3,56 @@ import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 
-def play(doors, nd, ng):
+def play(doors, nd, ngs):
     choice = randrange(nd)
     del(doors[choice]) # Deleting the first guess
-    for g in range (ng):
+    for g in range (ngs):
         for i, door in enumerate(doors):
             if door == 0:
-                del(doors[i]) # Deleting doors with goats
+                del(doors[i]) # Deleting the first door with a goat and quiting for
                 break
+
     if (doors[randrange(len(doors))] == 1):
         return 1
     return 0
 
-def simulation(N, nd, ng):
+
+def simulation(N, nd, ngs):
     change, stay = 0, 0
     for i in range (N):
         doors = [0]*nd
         doors[randrange(nd)] = 1
         stay += doors[randrange(nd)]
-        change += play(doors, nd, ng)
+        change += play(doors, nd, ngs)
     return change, stay
 
-def probTheorical (doors, goats):
-    return ((doors-1)/(doors*(doors-1-goats)))
+def probTheorical (nd, ngs):
+    return ((nd-1)/(nd*(nd-1-ngs)))
 
 def sampling(N):
+
     doors = int(input("The number of doors is: "))
-    while (doors < 2):
-        doors = int(input("Please, type a number >= 2: "))
+    while (doors < 3):
+        doors = int(input("Please, type a number >= 3: "))
     goats = int(input("The number of goats is: "))
-    while (goats < 0 or goats > doors-2):
-        goats = int(input(f"Please, type a number >= 0 and <= {doors-2}: "))
+    while (goats < 0 or goats > doors-1):
+        goats = int(input(f"Please, type a number >= 0 and <= {doors-1}: "))
     print("May the games begin!")
 
-    change, stay = simulation(N,doors,goats)
-    pTC, pTS = probTheorical(doors, goats), 1/doors
+    change, stay = simulation(N,nd,ngs)
+    pTC, pTS = probTheorical(nd, ngs), 1/nd
 
-    print()
-    print("Changing wins = ",change,"/ Probability of winning = ",change/N)
-    print("Theorical number of wins = ", pTC*N," Probability = ",pTC)
-    print()
-    print("Staying wins = ",stay,"/ Probability of winning = ",stay/N)
-    print("Theorical number of wins = ", pTS*N," Probability = ",pTS)
-    print()
+    print("\nChanging simulation/theorical probability =",change/N,"/",pTC)
+    print("Staying simulation/theorical probability =",stay,"/",pTS,"\n")
 
-    graphic = input("Type 'Y' if you want a graph: ")
-    if (graphic == "Y"):
-        label = input("Type 'Y' if you want labels: ")
+    graphic = input("Type 'g' if you want a graph: ")
+    if (graphic == "g"):
+        label = input("Type 'l' if you want labels: ")
         bl = False
-        if (label == "Y"):
+        if (label == "l"):
             bl = True
 
-        l = "Doors = " + str(doors) + " / Goats = " + str(goats)
+        l = "Doors = " + str(nd) + " / Goats Shown = " + str(ngs)
         labels = [l]
         x = np.arange(len(labels))  # the label locations
         width = 0.35  # the width of the bars
@@ -211,7 +209,7 @@ def main():
         if (type == "ng"):
             doors = int(input("The number of doors is: "))
             while (doors < 2):
-                doors = int(input("Please, type a number >= 2: "))
+                doors = int(input("Please, type a number >= 3: "))
             Ngoats(N,doors,bt,bl)
         else:
             a = int(input("Type the first door (a) of the interval: "))
